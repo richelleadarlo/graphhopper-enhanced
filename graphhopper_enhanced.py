@@ -62,7 +62,7 @@ def get_route(start_lat: float, start_lng: float, end_lat: float, end_lng: float
 
     Returns dict with keys: status (int) and data (json or None)
     """
-    params = {"vehicle": vehicle, "key": key}
+    params = {"vehicle": vehicle, "key": key, "points_encoded": "false"}
     # Build point parameters manually to avoid double-encoding weirdness
     points = [(start_lat, start_lng), (end_lat, end_lng)]
     url = ROUTE_URL
@@ -130,6 +130,54 @@ def print_route_summary(route_json: dict, orig_name: str, dest_name: str, vehicl
         print(tabulate(rows, headers=[Fore.YELLOW + "Instruction", Fore.YELLOW + "Distance"], tablefmt="grid"))
 
 
+def show_route_map(route_json: dict, map_filename: str | None = None) -> str | None:
+    """Render the route geometry into an interactive HTML map using folium.
+
+    Requires that the routing response contains 'points' with 'coordinates' (points_encoded=false).
+    Returns the path to the generated HTML file or None on failure.
+    """
+    try:
+        import folium
+        import webbrowser
+        import tempfile
+        import os
+    except Exception:
+        logger.info("folium or webbrowser not available; install folium to use map rendering")
+        return None
+
+    paths = route_json.get("paths")
+    if not paths:
+        return None
+
+    p = paths[0]
+    points = p.get("points")
+    coords = None
+    if points:
+        # points is expected to be a dict with 'coordinates' when points_encoded=false
+        coords = points.get("coordinates")
+
+    if not coords:
+        return None
+
+    # coordinates are [lng, lat] pairs per GeoJSON spec
+    polyline = [(lat, lng) for lng, lat in coords]
+
+    # center map on midpoint
+    mid = polyline[len(polyline) // 2]
+    m = folium.Map(location=mid, zoom_start=13)
+    folium.PolyLine(locations=polyline, color="blue", weight=5, opacity=0.8).add_to(m)
+    folium.Marker(location=polyline[0], popup="Start", icon=folium.Icon(color="green")).add_to(m)
+    folium.Marker(location=polyline[-1], popup="End", icon=folium.Icon(color="red")).add_to(m)
+
+    if not map_filename:
+        fd, map_filename = tempfile.mkstemp(prefix="route_", suffix=".html")
+        os.close(fd)
+
+    m.save(map_filename)
+    webbrowser.open(f"file:///{os.path.abspath(map_filename)}")
+    return map_filename
+
+
 def run_interactive(default_key: str):
     profiles = ["car", "bike", "foot"]
     while True:
@@ -175,6 +223,7 @@ def main(argv=None):
     parser.add_argument("--units", choices=["km", "miles"], default="km", help="Distance units")
     parser.add_argument("--api-key", dest="api_key", help="GraphHopper API key (overrides env GRAPHOPPER_API_KEY)")
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
+    parser.add_argument("--show-map", action="store_true", help="Open route in a browser map (requires folium)")
     args = parser.parse_args(argv)
 
     logging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)
@@ -193,6 +242,12 @@ def main(argv=None):
             print(Fore.CYAN + f"Routing API Status: {result.get('status')}\nURL: {result.get('url')}")
             if result.get("status") == 200 and result.get("data"):
                 print_route_summary(result["data"], orig["name"], dest["name"], args.vehicle, args.units)
+                if args.show_map:
+                    map_path = show_route_map(result["data"])
+                    if map_path:
+                        print(Fore.CYAN + f"Map saved and opened: {map_path}")
+                    else:
+                        print(Fore.RED + "Could not render map (missing coordinates or folium not installed).")
                 return 0
             print(Fore.RED + "Routing failed.")
             return 1
