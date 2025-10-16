@@ -130,11 +130,17 @@ def print_route_summary(route_json: dict, orig_name: str, dest_name: str, vehicl
         print(tabulate(rows, headers=[Fore.YELLOW + "Instruction", Fore.YELLOW + "Distance"], tablefmt="grid"))
 
 
-def show_route_map(route_json: dict, map_filename: str | None = None) -> str | None:
+def show_route_map(route_json: dict, vehicle: str = "car", map_filename: str | None = None, auto_open: bool = True) -> str | None:
     """Render the route geometry into an interactive HTML map using folium.
 
     Requires that the routing response contains 'points' with 'coordinates' (points_encoded=false).
     Returns the path to the generated HTML file or None on failure.
+    
+    Args:
+        route_json: The routing API response JSON
+        vehicle: Vehicle profile (car, bike, foot) for icon selection
+        map_filename: Optional path to save HTML file
+        auto_open: Whether to automatically open the map in browser
     """
     try:
         import folium
@@ -165,16 +171,43 @@ def show_route_map(route_json: dict, map_filename: str | None = None) -> str | N
     # center map on midpoint
     mid = polyline[len(polyline) // 2]
     m = folium.Map(location=mid, zoom_start=13)
-    folium.PolyLine(locations=polyline, color="blue", weight=5, opacity=0.8).add_to(m)
-    folium.Marker(location=polyline[0], popup="Start", icon=folium.Icon(color="green")).add_to(m)
-    folium.Marker(location=polyline[-1], popup="End", icon=folium.Icon(color="red")).add_to(m)
+    
+    # Vehicle profile icon/color mapping
+    vehicle_config = {
+        "car": {"color": "blue", "icon": "car", "prefix": "fa"},
+        "bike": {"color": "orange", "icon": "bicycle", "prefix": "fa"},
+        "foot": {"color": "green", "icon": "person-walking", "prefix": "fa"}
+    }
+    
+    config = vehicle_config.get(vehicle, vehicle_config["car"])
+    route_color = config["color"]
+    
+    # Draw route polyline
+    folium.PolyLine(locations=polyline, color=route_color, weight=5, opacity=0.8).add_to(m)
+    
+    # Start marker with vehicle icon
+    folium.Marker(
+        location=polyline[0],
+        popup=f"Start ({vehicle})",
+        icon=folium.Icon(color="green", icon=config["icon"], prefix=config["prefix"])
+    ).add_to(m)
+    
+    # End marker
+    folium.Marker(
+        location=polyline[-1],
+        popup="Destination",
+        icon=folium.Icon(color="red", icon="flag-checkered", prefix="fa")
+    ).add_to(m)
 
     if not map_filename:
         fd, map_filename = tempfile.mkstemp(prefix="route_", suffix=".html")
         os.close(fd)
 
     m.save(map_filename)
-    webbrowser.open(f"file:///{os.path.abspath(map_filename)}")
+    
+    if auto_open:
+        webbrowser.open(f"file:///{os.path.abspath(map_filename)}")
+    
     return map_filename
 
 
@@ -209,14 +242,66 @@ def run_interactive(default_key: str):
             print(Fore.CYAN + f"Routing API Status: {result.get('status')}\nURL: {result.get('url')}")
             if result.get("status") == 200 and result.get("data"):
                 print_route_summary(result["data"], orig["name"], dest["name"], vehicle, unit_choice)
+                # Ask if user wants to view map
+                view_map = input(Fore.YELLOW + "View map in browser? (y/n): ").strip().lower()
+                if view_map == "y":
+                    map_path = show_route_map(result["data"], vehicle=vehicle)
+                    if map_path:
+                        print(Fore.CYAN + f"Map opened: {map_path}")
+                    else:
+                        print(Fore.RED + "Could not render map.")
             else:
                 print(Fore.RED + "Routing failed. See status and/or check your API key and network.")
         else:
             print(Fore.RED + f"Geocoding failed for: {loc1 if orig['status']!=200 else ''} {loc2 if dest['status']!=200 else ''}")
 
 
+def serve_map_flask(route_json: dict, vehicle: str, port: int = 5000):
+    """Start a Flask server to serve the route map on localhost."""
+    try:
+        from flask import Flask, send_file
+        import tempfile
+        import os
+    except ImportError:
+        print(Fore.RED + "Flask not installed. Run: pip install flask")
+        return
+
+    app = Flask(__name__)
+    
+    # Generate map HTML
+    map_path = show_route_map(route_json, vehicle=vehicle, auto_open=False)
+    if not map_path:
+        print(Fore.RED + "Could not generate map.")
+        return
+    
+    @app.route('/')
+    def index():
+        return f"""
+        <html>
+        <head><title>GraphHopper Route Map</title></head>
+        <body style="margin:0; padding:0; font-family: Arial, sans-serif;">
+            <div style="padding: 20px; background: #2c3e50; color: white;">
+                <h1>🗺️ GraphHopper Route Map</h1>
+                <p>Vehicle: <strong>{vehicle}</strong></p>
+                <p><a href="/map" style="color: #3498db;">View Map</a></p>
+            </div>
+        </body>
+        </html>
+        """
+    
+    @app.route('/map')
+    def show_map():
+        return send_file(map_path, mimetype='text/html')
+    
+    print(Fore.GREEN + f"\n🌐 Flask server starting on http://localhost:{port}")
+    print(Fore.CYAN + f"📍 Open http://localhost:{port}/map to view your route")
+    print(Fore.YELLOW + "Press CTRL+C to stop the server\n")
+    
+    app.run(host='0.0.0.0', port=port, debug=False)
+
+
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="GraphHopper enhanced CLI")
+    parser = argparse.ArgumentParser(description="GraphHopper enhanced CLI with localhost map server")
     parser.add_argument("--from", dest="from_loc", help="Starting location")
     parser.add_argument("--to", dest="to_loc", help="Destination location")
     parser.add_argument("--vehicle", choices=["car", "bike", "foot"], default="car", help="Vehicle profile")
@@ -224,6 +309,9 @@ def main(argv=None):
     parser.add_argument("--api-key", dest="api_key", help="GraphHopper API key (overrides env GRAPHOPPER_API_KEY)")
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
     parser.add_argument("--show-map", action="store_true", help="Open route in a browser map (requires folium)")
+    parser.add_argument("--map-output", dest="map_output", help="Path to save generated map HTML (no auto-open)")
+    parser.add_argument("--serve", action="store_true", help="Start Flask server to serve map on localhost")
+    parser.add_argument("--port", type=int, default=5000, help="Port for Flask server (default: 5000)")
     args = parser.parse_args(argv)
 
     logging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)
@@ -242,10 +330,22 @@ def main(argv=None):
             print(Fore.CYAN + f"Routing API Status: {result.get('status')}\nURL: {result.get('url')}")
             if result.get("status") == 200 and result.get("data"):
                 print_route_summary(result["data"], orig["name"], dest["name"], args.vehicle, args.units)
-                if args.show_map:
-                    map_path = show_route_map(result["data"])
+                
+                # Handle map display options
+                if args.serve:
+                    # Start Flask server
+                    serve_map_flask(result["data"], args.vehicle, args.port)
+                elif args.show_map:
+                    map_path = show_route_map(result["data"], vehicle=args.vehicle)
                     if map_path:
                         print(Fore.CYAN + f"Map saved and opened: {map_path}")
+                    else:
+                        print(Fore.RED + "Could not render map (missing coordinates or folium not installed).")
+                elif args.map_output:
+                    # Save map to specific path (do not open)
+                    map_path = show_route_map(result["data"], vehicle=args.vehicle, map_filename=args.map_output, auto_open=False)
+                    if map_path:
+                        print(Fore.CYAN + f"Map saved to: {map_path}")
                     else:
                         print(Fore.RED + "Could not render map (missing coordinates or folium not installed).")
                 return 0
