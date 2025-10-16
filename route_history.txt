@@ -1,0 +1,4 @@
+Toronto, Ontario, Canada → 東京都 (Airplane, 10346.7 km, 12.17 hrs)
+Toronto, Ontario, Canada → الدوحة (Airplane, 10861.1 km, 12.78 hrs)
+Batangas LNG Terminal, Batangas, Philippines → Zamboanga City, Zamboanga Peninsula, Philippines (car, 1138.1 km, 30:46:28)
+Manila, Metro Manila, Philippines → Batangas City, Batangas, Philippines (bike, 114.1 km, 06:31:42)
