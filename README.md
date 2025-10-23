@@ -1,4 +1,6 @@
-<h1>DevNet & Chill | Activity 3 - Social Coding | Enhancing a Python Project using GraphHopper API</h1>
+<h1>TerraTrack | Enhancing a Python Project using GraphHopper API</h1>
+
+<h2>DevNet & Chill | Activity 3 - Social Coding</h2>
 
 <h3>Overview</h3>
 DevNet & Chill’s GraphHopper Enhanced Route Planner is a Python-based route mapping application that integrates the GraphHopper Directions API with enhanced UI features and an optional airplane simulation mode for international routes.
