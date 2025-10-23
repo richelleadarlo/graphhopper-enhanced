@@ -41,14 +41,11 @@ The project demonstrates teamwork, API integration, and feature enhancement with
 <h3>Setup Instructions</h3>
 
 1) Clone this repo: 
-git clone https://github.com/yourusername/graphhopper-enhanced-route-planner.git
-cd graphhopper-enhanced-route-planner
+git clone https://github.com/yourusername/graphhopper-enhanced/tree/v3-FINAL.git
 
 2) Install dependencies: pip install requests folium tabulate colorama
 
-3) Add your GraphHopper API Key from https://www.graphhopper.com/: Inyour code, insert your API at API_KEY = "your_api_key_here"
-
-4) Run the application: python graphhopper_enhanced.py
+3) Run the application on VS Code in a new terminal: python v3.py
 
 
 <h3>Usage</h3>
