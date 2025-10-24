@@ -1,3 +1,18 @@
+# ========================================================================================================
+# COMMENTS from Team DevOps 
+
+# Shanyka Tiemsim - Route History
+# As one can see, the route history feature is an accessible and convenient function, as it enables users 
+# to remember their past trips for comparison or reference. It does not only make  the  program  a  route 
+# generator, but a more interactive travel or journey assistant. By automatically saving the route into a 
+# text file, the data collected from previous sessions aren't lost and can be  utilized  for  the  future. 
+# Hence, it gives a sense of progress to the user as someone who is navigating through the roads, skies or 
+# seas. In future versions, it would be nice to have a visual interface for the history or save a preload 
+# of past routes based on the records that have already been saved.
+# ==========================================================================================================
+
+
+
 import requests
 import urllib.parse
 import webbrowser
