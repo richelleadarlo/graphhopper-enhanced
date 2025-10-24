@@ -1,3 +1,21 @@
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#Team DevOps
+
+#HEART GOLLOSO
+#This console-based routing system demonstrates strong functionality and clarity in logic flow. The integration of the Graphhopper
+#Geocoding and Routing APIs is handled effectively, allowing users to interactively request routes and view detailed travel data.
+#The use of colorama for colored terminal outputs improves user experience and readability, while the tabulate library
+#provides clean and professional table formatting for turn-by-turn directions. The structure of the geocoding() function and
+#main loop is straightforward and ensures consistent user input validation and API interaction.
+#RECOMMENDATIONS
+#To enhance the program, consider implementing centralized error handling with logging for better traceability of API responses
+#and potential issues. You could also add input sanitation to prevent invalid characters in location names. Including unit
+#conversion options within the results summary and allowing multiple stops or route comparisons would further increase
+#usability. Finally, consider refactoring repetitive code into smaller helper functions to improve maintainability and scalability.
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 import requests
 import urllib.parse
 from tabulate import tabulate
