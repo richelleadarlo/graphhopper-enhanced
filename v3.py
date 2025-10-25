@@ -156,6 +156,13 @@ while True:
             continue
 
         # --- Land Route with GraphHopper ---
+        
+        # =============================================================================================================
+        # DEVS - GEOTRAVEL                                                                                                         =
+        # Displays trip summary (distance, time, elevation, fuel) in a neat table for quick route overview - JUSTIN   =
+        #                                                                                                             =
+        #==============================================================================================================
+        
         op = f"&point={orig[1]}%2C{orig[2]}"
         dp = f"&point={dest[1]}%2C{dest[2]}"
         route_url = ROUTE_URL + urllib.parse.urlencode({"key": API_KEY, "vehicle": vehicle}) + op + dp
