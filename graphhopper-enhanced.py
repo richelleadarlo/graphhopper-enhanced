@@ -13,6 +13,20 @@
 #conversion options within the results summary and allowing multiple stops or route comparisons would further increase
 #usability. Finally, consider refactoring repetitive code into smaller helper functions to improve maintainability and scalability.
 
+#KING WHESTLIE YEMA
+#This console routing tool is clear, fast, and practical for command-line use. The geocoding and routing flow is easy to
+#follow, and the colored outputs plus tabulated directions make the results readable even in longer sessions. The looped
+#prompting pattern keeps interaction simple, and the distance/time/elevation summaries give users immediate trip insight.
+#Overall, it’s a solid foundation that balances simplicity with the right level of detail for terminal users.
+#RECOMMENDATIONS
+#Introduce localization: allow language selection and region-aware formatting (e.g., decimal/thousand separators) for outputs.
+#Offer route preferences (fastest vs. shortest) and avoidance options (tolls, ferries, unpaved) to reflect real travel choices.
+#Add cost & footprint estimates: user-supplied fuel price → trip cost; include approximate CO₂ emissions for awareness.
+#Provide a batch mode that reads a CSV of origin,destination,vehicle rows and writes a consolidated results report.
+#Support saved place aliases (e.g., @home, @office) stored in a small YAML/JSON file to speed repeated lookups.
+#Validate API responses against a lightweight schema to catch field changes early and show actionable error hints.
+#Make vehicle profiles pluggable via a config file (speeds, constraints) so users can tune assumptions per context.
+#Include a concise “one-line summary” mode for logs: From → To | Vehicle | Distance | ETA | Fuel/Cost for quick scans.
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
