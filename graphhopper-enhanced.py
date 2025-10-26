@@ -55,6 +55,12 @@
 # You all did an awesome job balancing functionality and presentation. Keep up the excellent work, team!
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# DEVS - GEOTRAVEL
+# The overall presentation is pretty good. The website after you type the location and destination is charming and - RICCI
+# has a lot of features. My only criticism is that you initially input entry names in the terminal instead of the - RICCI
+# website - RICCI
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 import requests
 import urllib.parse
