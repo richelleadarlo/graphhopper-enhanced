@@ -15,6 +15,18 @@
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# COMMENTS from Team SAISys 
+# Malvin: (Feature recommendations — (CLI automation & resilience))
+# Add argparse flags (vehicle, unit, output=table|csv|json, verbose/quiet) so the tool is scriptable beyond the REPL prompts.
+# Use requests.Session with retries, jittered backoff, and per-call timeouts; respect 429 Retry-After and mask the API key in any printed URL.
+# Load config from a .env file (API key, defaults) and validate at startup; never echo secrets to stdout.
+# Offer exporters: write summary + step list to CSV/JSON; optionally auto-size table width to the terminal for cleaner wraps.
+# Keep a small local cache (SQLite/JSON) for geocodes and routes with TTL to speed repeats and survive brief offline periods.
+# Maintain a session history file to recall/re-run the last routes quickly (with timestamps and chosen profiles).
+# Add graceful cancellation (Ctrl+C) with a tidy exit message and an optional spinner while awaiting API responses.
+# Provide unit tests that mock HTTP (e.g., responses) covering empty hits, 4xx/5xx, and edge distances/times to prevent regressions.
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 import requests
 import urllib.parse
