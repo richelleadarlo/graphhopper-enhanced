@@ -28,6 +28,20 @@
 # Provide unit tests that mock HTTP (e.g., responses) covering empty hits, 4xx/5xx, and edge distances/times to prevent regressions.
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# COMMENTS from Team SAISys 
+# Jaeho: (Positive Feedback — Appreciation & Praise)
+# The program is really well-made — it’s organized, functional, and easy to understand. I can see the effort and teamwork here.
+# I love how the interface uses colors; it makes the console look lively and user-friendly.
+# The way the routing and geocoding features are integrated is so smooth — great job managing API calls!
+# The code structure is clean and consistent, which shows good programming discipline and attention to detail.
+# The output tables are neatly formatted and easy to read — that’s a really nice touch for clarity.
+# I also appreciate how the code handles user input carefully; it feels natural and error-resistant.
+# The logic flow is solid, and every section of the code serves a clear purpose — great collaboration overall.
+# You all did an awesome job balancing functionality and presentation. Keep up the excellent work, team!
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 import requests
 import urllib.parse
 from tabulate import tabulate
