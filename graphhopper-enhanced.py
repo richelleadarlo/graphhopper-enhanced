@@ -27,6 +27,16 @@
 #Validate API responses against a lightweight schema to catch field changes early and show actionable error hints.
 #Make vehicle profiles pluggable via a config file (speeds, constraints) so users can tune assumptions per context.
 #Include a concise “one-line summary” mode for logs: From → To | Vehicle | Distance | ETA | Fuel/Cost for quick scans.
+
+#JOSHUA MALOLOY-ON
+#The program works really well and shows a good understanding of how to use the Graphhopper API for finding routes and locations.
+#It gives clear results like distance, travel time, and even fuel estimates, which makes it really useful.
+#I also like how the output is colorful and neatly organized in a table it’s easy to read and looks professional for a console app.
+#The code itself is clean, easy to follow, and runs smoothly without major issues. Overall, it’s a solid and well-made project.
+#RECOMMENDATIONS
+#To make it even better, you could add better error handling for cases when the API is slow or fails to respond. 
+#It would also be nice if the program could save or export route details, or maybe allow more than one stop in a trip. 
+#Adding a loading message or progress indicator while getting data would make it feel smoother to use.
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
