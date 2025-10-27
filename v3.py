@@ -11,6 +11,14 @@
 # of past routes based on the records that have already been saved.
 # ==========================================================================================================
 
+# CARANDANG, NICOLE - GROUP DEVS (GEOTRAVEL)
+# This program is a complete route finder that uses the GraphHopper API. -NICOLE
+# It can calculate both land and air routes, showing travel distance, time, and other trip details. -NICOLE
+# The code is well-organized with separate sections for geocoding, air route calculations, and routing logic. -NICOLE
+# It gives users multiple travel modes (car, bike, foot, airplane) and handles invalid inputs gracefully. -NICOLE
+# Visual features like color text (colorama), banners (pyfiglet), and maps (folium) make it engaging and user-friendly. -NICOLE
+# Data is displayed neatly using tabulate tables, and route history is saved automatically for tracking. -NICOLE
+# Overall, it’s a solid, interactive travel planner with clear structure, error handling, and visual appeal. -NICOLE
 
 
 import requests
