@@ -60,6 +60,11 @@
 # The overall presentation is pretty good. The website after you type the location and destination is charming and - RICCI
 # has a lot of features. My only criticism is that you initially input entry names in the terminal instead of the - RICCI
 # website - RICCI
+# COMMENT BY ROMASANTA
+# Great use of GraphHopper API with clear output.
+# Simple, readable, and user-friendly interface.
+# Suggest adding error handling and function wrap
+# for cleaner code structure. Nice work overall!
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 import requests
