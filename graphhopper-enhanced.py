@@ -27,6 +27,14 @@
 #Validate API responses against a lightweight schema to catch field changes early and show actionable error hints.
 #Make vehicle profiles pluggable via a config file (speeds, constraints) so users can tune assumptions per context.
 #Include a concise “one-line summary” mode for logs: From → To | Vehicle | Distance | ETA | Fuel/Cost for quick scans.
+
+"""
+Carl Lawrence Chua
+The code is well-structured and easy to follow, with clear separation between
+geocoding and routing logic. Variable naming (e.g., orig, dest, vehicle, unit_choice)
+is consistent and descriptive, making the workflow understandable. The use of
+colorama enhances user readability, and input validation is properly handled.
+"""
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
