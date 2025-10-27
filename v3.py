@@ -160,7 +160,10 @@ while True:
         # =============================================================================================================
         # DEVS - GEOTRAVEL                                                                                                         =
         # Displays trip summary (distance, time, elevation, fuel) in a neat table for quick route overview - JUSTIN   =
-        #                                                                                                             =
+        # Vincent - Add a data visualization feature to complement the text-based trip summary — for example, generate
+        # a graph showing elevation changes, fuel consumption, or distance vs. time using libraries like matplotlib or
+        # plotly. This would make the route analysis more interactive and help users better understand the terrain and
+        # travel efficiency visually.                                                                                                            =
         #==============================================================================================================
         
         op = f"&point={orig[1]}%2C{orig[2]}"
