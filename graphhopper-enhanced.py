@@ -77,6 +77,24 @@ colorama enhances user readability, and input validation is properly handled.
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# COMMENTS from Team SAISys 
+# Ragi: (Enhancement & Maintainability Recommendations)
+# The program demonstrates excellent structure and user interaction flow — smooth integration of the GraphHopper APIs and a
+# clear terminal interface. The use of colorama and tabulate makes it visually engaging and accessible to users.
+# RECOMMENDATIONS
+# Refactor repetitive code blocks (especially request handling and input validation) into reusable helper functions.
+# Move API keys and configuration (URLs, default units) to a separate config.json or .env file for better security and scalability.
+# Implement centralized exception handling with custom error messages for geocoding and routing to make debugging easier.
+# Add progress indicators or spinners (e.g., using rich) while waiting for API responses for a better UX.
+# Introduce command-line argument parsing (argparse) for automated runs and improved testing capability.
+# Create modular unit tests for geocoding, distance/time conversion, and response validation to ensure long-term reliability.
+# Plan for extensibility — structure the code to allow future GUI or web-based integration.
+# Include docstrings and developer notes throughout the codebase to make onboarding easier for new contributors.
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
 import requests
 import urllib.parse
 from tabulate import tabulate
