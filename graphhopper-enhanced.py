@@ -51,6 +51,15 @@ colorama enhances user readability, and input validation is properly handled.
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#Comment from Team SAISys
+#Renz: 
+#Great implementation of the routing feature — clear integration of distance, duration, and elevation data.
+#Inclusion of unit conversion and estimated fuel consumption adds strong real-world utility for end users.
+#The logic flow is straightforward, improving readability and maintenance.
+#Suggest adding exception handling for API requests to ensure reliability during network or data issues.
+#Overall, a concise, effective, and user-oriented use of the GraphHopper API.
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # COMMENTS from Team SAISys 
 # Jaeho: (Positive Feedback — Appreciation & Praise)
 # The program is really well-made — it’s organized, functional, and easy to understand. I can see the effort and teamwork here.
