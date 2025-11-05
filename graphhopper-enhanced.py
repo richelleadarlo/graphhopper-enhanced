@@ -48,6 +48,12 @@ colorama enhances user readability, and input validation is properly handled.
 # Maintain a session history file to recall/re-run the last routes quickly (with timestamps and chosen profiles).
 # Add graceful cancellation (Ctrl+C) with a tidy exit message and an optional spinner while awaiting API responses.
 # Provide unit tests that mock HTTP (e.g., responses) covering empty hits, 4xx/5xx, and edge distances/times to prevent regressions.
+
+# Joriz: (Vehicle and Unit Selection & Route Calculation and Output Display)
+# The Vehicle and Unit Selection lets users choose their vehicle type and distance unit is simple but effective. It’s nice that 
+# it gives clear options and even defaults to “car” or “km” if users make a mistake that makes it friendly and easy to use.
+# Route Calculation and Output Display pulls everything together really well. It calculates the distance, time, elevation, and even fuel consumption, then 
+# shows everything neatly in a table. The clean formatting and color-coded text make the results easy to read and visually appealing.
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
