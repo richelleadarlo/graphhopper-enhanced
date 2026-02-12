@@ -36,6 +36,15 @@ is consistent and descriptive, making the workflow understandable. The use of
 colorama enhances user readability, and input validation is properly handled.
 """
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# DEVS - GEOTRAVEL From Zaki
+# Implements real-time route planning using the GraphHopper API.
+# Converts place names into latitude/longitude coordinates via geocoding.
+# Retrieves and calculates travel routes, total distance, and estimated duration.
+# Displays results with color-coded outputs and formatted step-by-step directions.
+# Supports multiple transport profiles (car, bike, foot) and unit systems (km/miles).
+# Provides a clean and interactive command-line interface for travel analysis.
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # COMMENTS from Team SAISys 
