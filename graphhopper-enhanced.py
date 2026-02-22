@@ -1,3 +1,15 @@
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#Comments from Team SAISys - Zy
+# - Clear split between geocoding logic and the main CLI loop.
+#    The code separates the API processing (geocoding()) from user interaction in the main loop, which makes it easier to follow and maintain. 
+#    This organization helps keep the logic clean and modular for future updates.
+# - Avoid mixing user input inside geocoding() keep I/O in the CLI loop only.
+#    Having input() inside geocoding() mixes user handling with backend logic. 
+#    I personally thing it’s better to let the main loop manage inputs so the function can stay focused on API tasks and be reused or tested more easily.
+# - The inline comments are minimal and straightforward, which keeps the code clean.
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 import requests
 import urllib.parse
 from tabulate import tabulate
